@@ -11,7 +11,6 @@ pipeline
         string description: 'Host IP', name: 'hostip', trim: true
         booleanParam(name: 'ec2Plan', description: 'Planning EC2 Instance Deployment')
         booleanParam(name: 'ec2Create', description: 'Creating EC2 Instance')
-        booleanParam(name: 'ec2Destroy', description: 'Destroy EC2 Instance')
         booleanParam(name: 'host_IP', description: 'Insert Host IP')
         booleanParam(name: 'playbook', description: 'Run PlayBook')
         booleanParam(name: 'ec2Destroy', description: 'Destroy EC2 Instance')
@@ -37,7 +36,7 @@ pipeline
 		        expression{"${params.ec2Plan}"=="true"}
 		    }
             steps {
-                sh ('terraform plan --var-file ap-south.tfvars --var $subnet_id --var $vpc_security_group_ids  -no-color')
+                sh ('terraform plan --var-file ap-south.tfvars -var subnet_id=$subnet_id -var vpc_security_group_ids=$vpc_security_group_ids  -no-color')
             }
         }
         stage('Creating ec2') {
@@ -46,7 +45,7 @@ pipeline
 		        expression{"${params.ec2Create}"=="true"}
 		    }
             steps {
-                sh ('terraform apply --var-file ap-south.tfvars --var $subnet_id --var $vpc_security_group_ids --auto-approve -no-color')
+                sh ('terraform apply --var-file ap-south.tfvars var subnet_id=$subnet_id -var vpc_security_group_ids=$vpc_security_group_ids --auto-approve -no-color')
             }
         }
 		stage('Insert Host IP')
