@@ -7,7 +7,6 @@ pipeline
     }
     parameters {
         string description: 'Subnet ID 1', name: 'subnet_id', trim: true
-        string description: 'Security Group', name: 'vpc_security_group_ids', trim: true
         string description: 'Host IP', name: 'hostip', trim: true
         booleanParam(name: 'ec2Plan', description: 'Planning EC2 Instance Deployment')
         booleanParam(name: 'ec2Create', description: 'Creating EC2 Instance')
@@ -45,7 +44,7 @@ pipeline
 		        expression{"${params.ec2Create}"=="true"}
 		    }
             steps {
-                sh ('terraform apply --var-file ap-south-ec2.tfvars var subnet=$subnet_id --auto-approve -no-color')
+                sh ('terraform apply --var-file ap-south-ec2.tfvars -var subnet=$subnet_id --auto-approve -no-color')
             }
         }
 		stage('Insert Host IP')
