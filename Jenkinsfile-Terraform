@@ -13,7 +13,7 @@ pipeline {
         stage('Initiating Terraform configuration')
         {
             steps {
-                bat('terraform init -no-color')
+                sh ('terraform init -no-color')
                 }
             }
         stage('Planning Cluster') {
@@ -22,7 +22,7 @@ pipeline {
 		        expression{"${params.ClusterPlan}"=="true"}
 		    }
             steps {
-                bat('terraform plan --var-file ap-south-1.tfvars -no-color')
+                sh ('terraform plan --var-file ap-south-1.tfvars -no-color')
             }
         }
         stage('Creating Cluster') {
@@ -31,7 +31,7 @@ pipeline {
 		        expression{"${params.ClusterCreate}"=="true"}
 		    }
             steps {
-                bat('terraform apply --var-file ap-south-1.tfvars --auto-approve -no-color')
+                sh ('terraform apply --var-file ap-south-1.tfvars --auto-approve -no-color')
             }
         }
         stage('Destroy Cluster') {
@@ -40,7 +40,7 @@ pipeline {
                 expression{"${params.ClusterDestroy}"=="true"}
             }
             steps {
-                bat 'terraform destroy --var-file ap-south-1.tfvars --auto-approve -no-color'
+                sh  'terraform destroy --var-file ap-south-1.tfvars --auto-approve -no-color'
             }
         }
     }
