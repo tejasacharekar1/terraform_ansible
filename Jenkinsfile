@@ -36,7 +36,7 @@ pipeline
 		        expression{"${params.ec2Plan}"=="true"}
 		    }
             steps {
-                sh ('terraform plan --var-file ap-south-ec2.tfvars -var subnet_id=$subnet_id -var vpc_security_group_ids=$vpc_security_group_ids  -no-color')
+                sh ('terraform plan --var-file ap-south-ec2.tfvars -var subnet=$subnet_id -no-color')
             }
         }
         stage('Creating ec2') {
@@ -45,7 +45,7 @@ pipeline
 		        expression{"${params.ec2Create}"=="true"}
 		    }
             steps {
-                sh ('terraform apply --var-file ap-south-ec2.tfvars var subnet_id=$subnet_id -var vpc_security_group_ids=$vpc_security_group_ids --auto-approve -no-color')
+                sh ('terraform apply --var-file ap-south-ec2.tfvars var subnet=$subnet_id --auto-approve -no-color')
             }
         }
 		stage('Insert Host IP')

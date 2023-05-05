@@ -1,10 +1,10 @@
 variable "region"{
 type = string
 }
-variable "vpcid" {
-type = list
+variable "vpcs" {
+  type = list(string)
 }
-variable "subnetid" {
+variable "subnet" {
 type = string
 }
 

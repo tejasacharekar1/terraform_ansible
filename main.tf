@@ -5,8 +5,8 @@ module "ec2_instance" {
   ami                    = var.ami
   instance_type          = var.instance_type
   key_name               = var.key_name
-  vpc_security_group_ids = var.vpcid
-  subnet_id              = var.subnetid
+  vpcs = var.vpcs
+  subnet              = var.subnet
   Name                   = var.Name
   Owner                  = var.Owner
   Purpose                = var.Purpose
