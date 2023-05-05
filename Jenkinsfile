@@ -83,7 +83,7 @@ pipeline
                 expression{"${params.ec2Destroy}"=="true"}
             }
             steps {
-                sh  'terraform destroy --var-file ap-south-ec2.tfvars --auto-approve -no-color'
+                sh  'terraform destroy --var-file ap-south-ec2.tfvars -var subnet=$subnet_id --auto-approve -no-color'
             }
         }
 
