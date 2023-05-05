@@ -5,8 +5,8 @@ pipeline {
 	awscredential = credentials("sayalim-creds")
 	}
     parameters {
-        booleanParam(name: 'ClusterPlan', description: 'Planning EKS Cluster')
-        booleanParam(name: 'ClusterCreate', description: 'Creating EKS Cluster')
+        booleanParam(name: 'ClusterPlan', description: 'Planning Ansible Cluster')
+        booleanParam(name: 'ClusterCreate', description: 'Creating Ansible Cluster')
         booleanParam(name: 'ClusterDestroy', description: 'Destroy Cluster')
     }
     stages {
