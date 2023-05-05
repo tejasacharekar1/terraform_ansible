@@ -56,7 +56,7 @@ pipeline
 			steps
 			{
 				sh 'echo "[webservers]" > host.inv'
-				sh 'echo "\n $hostip" > host.inv'
+				sh 'echo -e "\n $hostip" > host.inv'
 			}
 		}
         stage('Checking Ansible')
