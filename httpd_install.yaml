@@ -14,7 +14,7 @@
      enabled: true
   - name: copy conf file
     copy:
-      src: /home/ec2-user/index/
+      src: index.html
       dest: /var/www/html/
   - name: "server restart"
     service:
