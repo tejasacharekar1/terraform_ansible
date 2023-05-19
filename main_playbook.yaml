@@ -1,0 +1,22 @@
+- name: Install packages
+  become_user: root
+  yum:
+    name: "{{ packages }}"
+    state: latest
+
+- name: start and enable httpd service
+  become_user: root
+  service:
+    name: "{{ httpd_service }}"
+    state: started
+    enabled: true
+
+- name: copy conf file
+  copy:
+    src: index.html
+    dest: /var/www/html/
+
+- name: "server restart"
+  service:
+    name: "{{ httpd_service }}"
+    state: restarted
